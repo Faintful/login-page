@@ -12,7 +12,14 @@ const Login = (props) => {
   const [formIsValid, setFormIsValid] = useState(false);
 
   useEffect(() => {
-    setFormIsValid(enteredEmail.includes('@') && enteredPassword.length > 6);
+    const timerID = setTimeout(() => {
+      console.log('save');
+      setFormIsValid(enteredEmail.includes('@') && enteredPassword.length > 6);
+    }, 500);
+    return () => {
+      console.log('change');
+      clearTimeout(timerID);
+    };
   }, [enteredEmail, enteredPassword]);
 
   const emailChangeHandler = (event) => {
